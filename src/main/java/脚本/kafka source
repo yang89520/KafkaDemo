@@ -1,0 +1,31 @@
+#需求: 从kafka topic中读取数据展示在控制台<使用kafka source>
+#1、命名agent、source、channel、sink
+a1.sources = r1
+a1.channels = c1
+a1.sinks = k1
+
+#2、描述source
+a1.sources.r1.type = org.apache.flume.source.kafka.KafkaSource
+a1.sources.r1.kafka.bootstrap.servers = hadoop102:9092,hadoop103:9092
+#指定消费者组id
+a1.sources.r1.kafka.consumer.group.id = g12
+#指定读取topic名称
+a1.sources.r1.kafka.topics = second
+#batchSize<=transactionCapacity<=capacity
+a1.sources.r1.batchSize = 100
+#指定消费者组第一次消费topic的数据从哪个位置读取数据
+a1.sources.r1.kafka.consumer.auto.offset.reset = earliest
+
+#3、描述channel
+a1.channels.c1.type = memory
+#channel容量大小
+a1.channels.c1.capacity = 100
+#事务容量大小
+a1.channels.c1.transactionCapacity = 100
+
+#4、描述sink
+a1.sinks.k1.type = logger
+
+#5、关联source->channel->sink
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1

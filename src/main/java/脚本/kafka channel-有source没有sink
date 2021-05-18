@@ -1,0 +1,22 @@
+#需求： 从netcat采集数据保存到kafka
+#1、命名agent、source、channel
+a1.sources = r1
+a1.channels = c1
+
+#2、描述source
+a1.sources.r1.type = netcat
+a1.sources.r1.bind = 0.0.0.0
+a1.sources.r1.port = 8888
+
+#3、描述channel
+#指定channel类型
+a1.channels.c1.type = org.apache.flume.channel.kafka.KafkaChannel
+#指定kafka集群地址
+a1.channels.c1.kafka.bootstrap.servers = hadoop102:9092,hadoop103:9092
+#指定数据写入哪个topic
+a1.channels.c1.kafka.topic = netcat_log
+#是否以event格式写入kafka, true=event写入,false=只写event的body数据
+a1.channels.c1.parseAsFlumeEvent = false
+
+#4、关联source->channel
+a1.sources.r1.channels = c1

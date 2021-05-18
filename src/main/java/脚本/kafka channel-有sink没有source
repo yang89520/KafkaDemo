@@ -1,0 +1,21 @@
+#需求: 从kafka topic中读取数据展示在控制台
+#1、命名agent、channel、sink
+a1.channels = c1
+a1.sinks = k1
+
+#2、描述channel
+a1.channels.c1.type = org.apache.flume.channel.kafka.KafkaChannel
+a1.channels.c1.kafka.bootstrap.servers = hadoop102:9092,hadoop103:9092
+a1.channels.c1.kafka.topic = second
+a1.channels.c1.kafka.consumer.group.id = g10
+#指定读取的时候是否以event形式读取
+a1.channels.c1.parseAsFlumeEvent = false
+#指定消费者组第一次消费topic的数据从哪个位置读取数据
+a1.channels.c1.kafka.consumer.auto.offset.reset = earliest
+
+
+#3、描述sink
+a1.sinks.k1.type = logger
+
+#4、关联channel->sink
+a1.sinks.k1.channel = c1

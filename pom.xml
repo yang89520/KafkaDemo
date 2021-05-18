@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.atguigu</groupId>
+    <artifactId>kafka0122</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <!--1. ${basedir} 项目根目录
+                2. ${project.build.directory} 构建目录，缺省为target
+                3. ${project.build.outputDirectory} 构建过程输出目录，缺省为target/classes
+                4. ${project.build.finalName} 产出物名称，缺省为${project.artifactId}-${project.version}
+                5. ${project.packaging} 打包类型，缺省为jar
+                6. ${project.xxx} 当前pom文件的任意节点的内容
+                -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.8</version>
+<!--                <executions>-->
+<!--                    &lt;!&ndash;可以配置多个execution，只要id不重即可&ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>copy-dependencies</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        &lt;!&ndash;goals有多个方式，copy，unpack,copy-dependencies等 具体可以去https://maven.apache.org/plugins/maven-dependency-plugin/usage.html这里看&ndash;&gt;-->
+<!--                        <goals>-->
+<!--                            <goal>copy-dependencies</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            &lt;!&ndash;指定输出目录，${project.build.directory} 可以在pom.xml中配置自己的默认路径&ndash;&gt;-->
+<!--                            <outputDirectory>${project.build.directory}</outputDirectory>-->
+<!--                            <overWriteReleases>true</overWriteReleases>-->
+<!--                            <overWriteSnapshots>true</overWriteSnapshots>-->
+<!--                            <overWriteIfNewer>true</overWriteIfNewer>-->
+<!--                            <useSubDirectoryPerType>true</useSubDirectoryPerType>-->
+<!--                            &lt;!&ndash;指定打的依赖包，只需要ArtifactIds&ndash;&gt;-->
+<!--                            <includeArtifactIds>guava</includeArtifactIds>-->
+<!--                            <silent>true</silent>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.62</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff</artifactId>
+            <version>1.1.6</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-metastore</artifactId>
+            <version>2.3.5</version>
+        </dependency>
+
+    </dependencies>
+
+
+
+
+
+
+
+
+
+</project>
